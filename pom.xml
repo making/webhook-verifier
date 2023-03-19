@@ -6,7 +6,7 @@
 
 	<groupId>am.ik.webhook</groupId>
 	<artifactId>webhook-verifier</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.1.0</version>
 	<name>webhook-verifier</name>
 	<description>webhook verifier for Java</description>
 
