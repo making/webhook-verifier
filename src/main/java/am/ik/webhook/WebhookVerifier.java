@@ -2,15 +2,17 @@ package am.ik.webhook;
 
 import java.util.logging.Logger;
 
+import am.ik.webhook.WebhookSigner.Encoder;
+
 public final class WebhookVerifier {
 
 	private final Logger log = Logger.getLogger(WebhookVerifier.class.getName());
 
 	private final WebhookSigner signer;
 
-	private final WebhookEncoder encoder;
+	private final Encoder encoder;
 
-	public WebhookVerifier(WebhookSigner signer, WebhookEncoder encoder) {
+	public WebhookVerifier(WebhookSigner signer, Encoder encoder) {
 		this.signer = signer;
 		this.encoder = encoder;
 	}
@@ -28,11 +30,11 @@ public final class WebhookVerifier {
 	}
 
 	public static WebhookVerifier gitHubSha1(String secret) {
-		return new WebhookVerifier(WebhookSigner.hmacSha1(secret), WebhookEncoder.HEX);
+		return new WebhookVerifier(WebhookSigner.hmacSha1(secret), Encoder.HEX);
 	}
 
 	public static WebhookVerifier gitHubSha256(String secret) {
-		return new WebhookVerifier(WebhookSigner.hmacSha256(secret), WebhookEncoder.HEX);
+		return new WebhookVerifier(WebhookSigner.hmacSha256(secret), Encoder.HEX);
 	}
 
 }
