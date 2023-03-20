@@ -1,11 +1,18 @@
 package am.ik.webhook;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Objects;
 
 @FunctionalInterface
 public interface WebhookSigner {
 
-	String sign(String payload, Encoder encoder);
+	default String sign(String payload, Encoder encoder) {
+		return this.sign(Objects.requireNonNull(payload, "'payload' must not be null").getBytes(StandardCharsets.UTF_8),
+				encoder);
+	}
+
+	String sign(byte[] payload, Encoder encoder);
 
 	static WebhookSigner hmacSha1(String secret) {
 		return new HmacWebhookSigner("SHA1", secret);

@@ -30,8 +30,8 @@ public final class HmacWebhookSigner implements WebhookSigner {
 	}
 
 	@Override
-	public String sign(String payload, Encoder encoder) {
-		final byte[] sig = this.hmac.doFinal(requireNonNull(payload, "'payload' must not be null").getBytes());
+	public String sign(byte[] payload, Encoder encoder) {
+		final byte[] sig = this.hmac.doFinal(requireNonNull(payload, "'payload' must not be null"));
 		return this.algorithmName + "=" + encoder.encode(sig);
 	}
 
