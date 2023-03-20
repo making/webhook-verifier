@@ -10,7 +10,7 @@ class Hex {
 		return sb.toString();
 	}
 
-	public static String toHex(byte b) {
+	static String toHex(byte b) {
 		final char[] hex = new char[2];
 		hex[0] = Character.forDigit((b >> 4) & 0xF, 16);
 		hex[1] = Character.forDigit((b & 0xF), 16);
