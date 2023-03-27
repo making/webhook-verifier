@@ -5,10 +5,18 @@ on:
     branches:
     - develop
     - main
-  pull_request:
+    paths:
+    - src/**
+    - pom.xml
+    - .github/workflows/ci.yaml
+  pull_request_target:
     branches:
     - develop
     - main
+    paths:
+    - src/**
+    - pom.xml
+    - .github/workflows/ci.yaml
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,7 +27,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Import Secrets
       id: secrets
-      uses: hashicorp/vault-action@v2.4.3
+      uses: hashicorp/vault-action@v2.5.0
       with:
         exportToken: true
         exportEnv: true
@@ -35,7 +43,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '17'
-        distribution: 'temurin'
+        distribution: 'liberica'
         cache: maven
         gpg-private-key: ${{ steps.secrets.outputs.GPG_SECRING }}
         gpg-passphrase: ${{ steps.secrets.outputs.GPG_PASSPHRASE }}
